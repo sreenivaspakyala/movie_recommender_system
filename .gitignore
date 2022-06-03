@@ -1,5 +1,5 @@
 # env files
-.keys.env
+movie_recommender_system/keys.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
