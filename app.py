@@ -1,15 +1,25 @@
+import os
+
 import streamlit as st
 import pickle
 import pandas as pd
 import requests
+import os
 import bz2
 import _pickle as cpickle
+from dotenv import load_dotenv
+
+load_dotenv('keys.env')
+
+api_key = os.getenv('API_KEY')
+image_path = os.getenv('IMAGE_PATH')
+
 
 
 def get_poster(movie_id):
-    response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=daaffae9912a7557bdc225add057fb7e&language=en-US'.format(movie_id))
+    response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key={}&language=en-US'.format(movie_id,api_key))
     data = response.json()
-    return "https://image.tmdb.org/t/p/w780/" + data['poster_path']
+    return image_path + data['poster_path']
 
 def decompress_pickle(file):
      data = bz2.BZ2File(file, 'rb')
